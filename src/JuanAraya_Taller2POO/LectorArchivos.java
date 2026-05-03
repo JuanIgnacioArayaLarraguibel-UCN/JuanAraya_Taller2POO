@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class LectorArchivos {
-//Clase para leer el archivo para asi llevarlos a los gimnasios y altomando q luego haré
+//Clase para leer el archivo para asi llevarlos a los gimnasios y elitefour q luego haré
     public static List<Pokemon> cargarPokedex(String ruta) {
         List<Pokemon> pokedex = new ArrayList<>();
         try (Scanner scanner = new Scanner(new File(ruta))) {
@@ -60,8 +60,8 @@ public class LectorArchivos {
         return gimnasios;
     }
 
-    public static List<AltoMando> cargarAltoMando(String ruta, List<Pokemon> pokedex) {
-        List<AltoMando> altoMando = new ArrayList<>();
+    public static List<EliteFour> cargarEliteFour(String ruta, List<Pokemon> pokedex) {
+        List<EliteFour> eliteFour = new ArrayList<>();
         try (Scanner scanner = new Scanner(new File(ruta))) {
             while (scanner.hasNextLine()) {
                 String[] datos = scanner.nextLine().split(";");
@@ -77,11 +77,11 @@ public class LectorArchivos {
                         }
                     }
                 }
-                altoMando.add(new AltoMando(numero, nombre, lista));
+                eliteFour.add(new EliteFour(numero, nombre, lista));
             }
         } catch (Exception e) {
             System.out.println("Error");
         }
-        return altoMando;
+        return eliteFour;
     }
 }
