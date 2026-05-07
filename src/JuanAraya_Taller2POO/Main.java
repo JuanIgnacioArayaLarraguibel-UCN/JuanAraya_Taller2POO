@@ -15,6 +15,47 @@ public class Main {
     private static List<EliteFour> eliteFour;
     private static Jugador jugador;
 	public static void main(String[] args) {
+		//aca se encargara de llamar los archivos para los datos
+		pokedex = LectorArchivos.cargarPokedex("Pokedex.txt");
+		gimnasios = LectorArchivos.cargarGimnasios("Gimnasios.txt", pokedex);
+		eliteFour= LectorArchivos.cargarEliteFour("Alto Mando.txt", pokedex); //Dios no puedo cambiarle el nombre al TXT DIOS
+		
+		//el metodo para entrar al menu de inicio
+		menuInicio();
+		
+	}
+	private static void menuInicio() {
+
+		int opcion;
+		do {
+			System.out.println("Bienvenido");
+			System.out.println("1) Continuar");
+			System.out.println("2) Nueva Partida");
+			System.out.println("3) Salir");
+			opcion= scanner.nextInt();
+			
+			switch(opcion) {
+			case 1:
+				continuarPartida();
+				
+			case 2:
+				nuevaPartida();
+			case 3:
+				System.out.println("Hasta luego entrenador");
+			default:
+				System.out.println("Ingresar opcion válida porfavorrrrrr");
+			}
+			
+			
+		}while(opcion!=3);
+		
+	}
+	private static void nuevaPartida() {
+		// TODO Auto-generated method stub
+		
+	}
+	private static void continuarPartida() {
+		// TODO Auto-generated method stub
 		
 	}
 }
