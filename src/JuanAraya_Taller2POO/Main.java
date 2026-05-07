@@ -18,7 +18,7 @@ public class Main {
 		//aca se encargara de llamar los archivos para los datos
 		pokedex = LectorArchivos.cargarPokedex("Pokedex.txt");
 		gimnasios = LectorArchivos.cargarGimnasios("Gimnasios.txt", pokedex);
-		eliteFour= LectorArchivos.cargarEliteFour("Alto Mando.txt", pokedex); //Dios no puedo cambiarle el nombre al TXT DIOS
+		eliteFour= LectorArchivos.cargarEliteFour("Elite Four.txt", pokedex);
 		
 		//el metodo para entrar al menu de inicio
 		menuInicio();
@@ -51,7 +51,12 @@ public class Main {
 		
 	}
 	private static void nuevaPartida() {
-		// TODO Auto-generated method stub
+		System.out.print("Ingrese su apodo de jugador: ");
+        String nombre = scanner.nextLine();
+        jugador = new Jugador(nombre);
+        System.out.println("Bienvenido " + nombre + " !!");
+        Partida.guardarPartida("Registros.txt", jugador);
+        menuPrincipal();
 		
 	}
 	private static void continuarPartida() {
