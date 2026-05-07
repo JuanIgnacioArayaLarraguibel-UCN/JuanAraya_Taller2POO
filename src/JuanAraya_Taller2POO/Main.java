@@ -82,7 +82,7 @@ public class Main {
                 case 1 -> jugador.mostrarEquipo();
                 case 2 -> salirACapturar();
                 case 4 -> new ControlGimnasios(gimnasios).retarGimnasio(jugador);
-                case 5 -> new ControlAltoMando(altoMando).desafiarAltoMando(jugador);
+                case 5 -> new ControlEliteFour(eliteFour).desafiarEliteFour(jugador);
                 case 6 -> jugador.curarEquipo();
                 case 7 -> Partida.guardarPartida("Registros.txt", jugador);
                 case 8 -> {
