@@ -55,6 +55,15 @@ public class Main {
 		
 	}
 	private static void continuarPartida() {
+        jugador = Partida.cargarPartida("Registros.txt", pokedex);
+        if (jugador != null) {
+            System.out.println("Bienvenido " + jugador.getNombre());
+            menuPrincipal();
+        } else {
+            System.out.println("No se encontró partida guardada");
+        }
+    }
+	private static void menuPrincipal() {
 		// TODO Auto-generated method stub
 		
 	}
