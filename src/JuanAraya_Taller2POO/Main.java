@@ -35,15 +35,10 @@ public class Main {
 			opcion= scanner.nextInt();
 			
 			switch(opcion) {
-			case 1:
-				continuarPartida();
-				
-			case 2:
-				nuevaPartida();
-			case 3:
-				System.out.println("Hasta luego entrenador");
-			default:
-				System.out.println("Ingresar opcion válida porfavorrrrrr");
+			case 1 -> continuarPartida();
+			case 2 ->nuevaPartida();
+			case 3 ->System.out.println("Hasta luego entrenador");
+			default->System.out.println("Ingresar opcion válida porfavorrrrrr");
 			}
 			
 			
@@ -69,7 +64,34 @@ public class Main {
         }
     }
 	private static void menuPrincipal() {
-		// TODO Auto-generated method stub
-		
-	}
+        int opcion;
+        do {
+            System.out.println(jugador.getNombre() + ", que deseas hacer?");
+            System.out.println("1) Revisar equipo");
+            System.out.println("2) Salir a capturar");
+            System.out.println("3) Acceso al PC");
+            System.out.println("4) Retar un gimnasio");
+            System.out.println("5) Desafío al Alto Mando");
+            System.out.println("6) Curar Pokémon");
+            System.out.println("7) Guardar");
+            System.out.println("8) Guardar y Salir");
+            opcion = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opcion) {
+                case 1 -> jugador.mostrarEquipo();
+                case 2 -> salirACapturar();
+                case 4 -> new ControlGimnasios(gimnasios).retarGimnasio(jugador);
+                case 5 -> new ControlAltoMando(altoMando).desafiarAltoMando(jugador);
+                case 6 -> jugador.curarEquipo();
+                case 7 -> Partida.guardarPartida("Registros.txt", jugador);
+                case 8 -> {
+                    Partida.guardarPartida("Registros.txt", jugador);
+                    System.out.println("Hasta luego entrenador");
+                    return;
+                }
+                default -> System.out.println("Opción aún no implementada");
+            }
+        } while (true);
+    }
 }
