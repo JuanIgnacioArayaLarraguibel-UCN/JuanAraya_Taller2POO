@@ -9,63 +9,60 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
-//esto va a estar Funny es lo q falta y aqui vienen los commits por metodos ya q hice commits por clases para no tirar muchos
-	
-	private static Scanner scanner = new Scanner(System.in);
-	private static List<Pokemon> pokedex;
+    private static Scanner scanner = new Scanner(System.in);
+    private static List<Pokemon> pokedex;
     private static List<Gimnasio> gimnasios;
     private static List<EliteFour> eliteFour;
     private static Jugador jugador;
-	public static void main(String[] args) {
-		//aca se encargara de llamar los archivos para los datos
-		pokedex = LectorArchivos.cargarPokedex("Pokedex.txt");
-		gimnasios = LectorArchivos.cargarGimnasios("Gimnasios.txt", pokedex);
-		eliteFour= LectorArchivos.cargarEliteFour("Elite Four.txt", pokedex);
-		
-		//el metodo para entrar al menu de inicio
-		menuInicio();
-		
-	}
-	private static void menuInicio() {
 
-		int opcion;
-		do {
-			System.out.println("Bienvenido");
-			System.out.println("1) Continuar");
-			System.out.println("2) Nueva Partida");
-			System.out.println("3) Salir");
-			opcion= scanner.nextInt();
-			
-			switch(opcion) {
-			case 1 -> continuarPartida();
-			case 2 ->nuevaPartida();
-			case 3 ->System.out.println("Hasta luego entrenador");
-			default->System.out.println("Ingresar opcion válida porfavorrrrrr");
-			}
-			
-			
-		}while(opcion!=3);
-		
-	}
-	private static void nuevaPartida() {
-		System.out.print("Ingrese su apodo de jugador: ");
+    public static void main(String[] args) {
+        // Cargar datos iniciales
+        pokedex = LectorArchivos.cargarPokedex("Pokedex.txt");
+        gimnasios = LectorArchivos.cargarGimnasios("Gimnasios.txt", pokedex);
+        eliteFour = LectorArchivos.cargarEliteFour("Elite Four.txt", pokedex);
+
+        menuInicial();
+    }
+
+    private static void menuInicial() {
+        int opcion;
+        do {
+            System.out.println("Bienvenido al juego Pokémon!");
+            System.out.println("1) Continuar");
+            System.out.println("2) Nueva Partida");
+            System.out.println("3) Salir");
+            opcion = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opcion) {
+                case 1 -> continuarPartida();
+                case 2 -> nuevaPartida();
+                case 3 -> System.out.println("Nos vemos entrenador...");
+                default -> System.out.println("Opción inválida");
+            }
+        } while (opcion != 3);
+    }
+
+    private static void continuarPartida() {
+        jugador = Partida.cargarPartida("Registros.txt", pokedex);
+        if (jugador != null) {
+            System.out.println("Bienvenido de nuevo " + jugador.getNombre() + "!");
+            menuPrincipal();
+        } else {
+            System.out.println("No se encontró partida guardada.");
+        }
+    }
+
+    private static void nuevaPartida() {
+        System.out.print("Ingrese su apodo de jugador: ");
         String nombre = scanner.nextLine();
         jugador = new Jugador(nombre);
         System.out.println("Bienvenido " + nombre + " !!");
         Partida.guardarPartida("Registros.txt", jugador);
         menuPrincipal();
-		
-	}
-	private static void continuarPartida() {
-        jugador = Partida.cargarPartida("Registros.txt", pokedex);
-        if (jugador != null) {
-            System.out.println("Bienvenido " + jugador.getNombre());
-            menuPrincipal();
-        } else {
-            System.out.println("No se encontró partida guardada");
-        }
     }
-	private static void menuPrincipal() {
+
+    private static void menuPrincipal() {
         int opcion;
         do {
             System.out.println(jugador.getNombre() + ", que deseas hacer?");
@@ -89,18 +86,17 @@ public class Main {
                 case 7 -> Partida.guardarPartida("Registros.txt", jugador);
                 case 8 -> {
                     Partida.guardarPartida("Registros.txt", jugador);
-                    System.out.println("Hasta luego entrenador");
+                    System.out.println("Nos vemos entrenador...");
                     return;
                 }
-                default -> System.out.println("Opción aún no implementada");
+                default -> System.out.println("Opción aún no implementada.");
             }
         } while (true);
     }
-	
-	
-	private static void salirACapturar() {
+
+    private static void salirACapturar() {
         System.out.println("Zonas disponibles:");
-        System.out.println("1) Lago, 2) Cueva, 3) Montaña, 4) Bosque, 5) Prado ,6) Mar");
+        System.out.println("1) Lago\n2) Cueva\n3) Montaña\n4) Bosque\n5) Prado\n6) Mar"); //busque como se hacia para que quedara mas bonito
         int zona = scanner.nextInt();
         scanner.nextLine();
 
@@ -123,8 +119,8 @@ public class Main {
             }
             if (!posibles.isEmpty()) {
                 Pokemon encontrado = posibles.get(new Random().nextInt(posibles.size()));
-                System.out.println("¡Ha aparecido un " + encontrado.getNombre() + "!");
-                System.out.println("1) Capturar, 2) Huir");
+                System.out.println("¡Ha aparecido un increíble " + encontrado.getNombre() + "!");
+                System.out.println("1) Capturar\n2) Huir");
                 int opcion = scanner.nextInt();
                 if (opcion == 1) {
                     jugador.agregarPokemon(encontrado);
