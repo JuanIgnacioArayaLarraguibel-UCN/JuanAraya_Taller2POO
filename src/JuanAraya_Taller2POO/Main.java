@@ -16,7 +16,7 @@ public class Main {
     private static Jugador jugador;
 
     public static void main(String[] args) {
-        // Cargar datos iniciales
+        // esto carga los archivos para los datos
         pokedex = LectorArchivos.cargarPokedex("Pokedex.txt");
         gimnasios = LectorArchivos.cargarGimnasios("Gimnasios.txt", pokedex);
         eliteFour = LectorArchivos.cargarEliteFour("Elite Four.txt", pokedex);
@@ -61,7 +61,7 @@ public class Main {
         Partida.guardarPartida("Registros.txt", jugador);
         menuPrincipal();
     }
-
+//el menu al empezar partida
     private static void menuPrincipal() {
         int opcion;
         do {
@@ -93,7 +93,7 @@ public class Main {
             }
         } while (true);
     }
-
+// lo de \n hace que se vea más bonito
     private static void salirACapturar() {
         System.out.println("Zonas disponibles:");
         System.out.println("1) Lago\n2) Cueva\n3) Montaña\n4) Bosque\n5) Prado\n6) Mar"); //busque como se hacia para que quedara mas bonito
@@ -119,12 +119,12 @@ public class Main {
             }
             if (!posibles.isEmpty()) {
                 Pokemon encontrado = posibles.get(new Random().nextInt(posibles.size()));
-                System.out.println("¡Ha aparecido un increíble " + encontrado.getNombre() + "!");
+                System.out.println("¡Ha aparecido un " + encontrado.getNombre());
                 System.out.println("1) Capturar\n2) Huir");
                 int opcion = scanner.nextInt();
                 if (opcion == 1) {
                     jugador.agregarPokemon(encontrado);
-                    System.out.println(encontrado.getNombre() + " capturado con éxito!");
+                    System.out.println(encontrado.getNombre() + " capturado");
                 }
             }
         }
