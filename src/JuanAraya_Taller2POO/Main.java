@@ -3,7 +3,9 @@ package JuanAraya_Taller2POO;
 //RUT: 21.566.260-8
 //Carrera: Ingenieria en Tecnologias de Información
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -94,4 +96,42 @@ public class Main {
             }
         } while (true);
     }
+	
+	
+	private static void salirACapturar() {
+        System.out.println("Zonas disponibles:");
+        System.out.println("1) Lago, 2) Cueva, 3) Montaña, 4) Bosque, 5) Prado ,6) Mar");
+        int zona = scanner.nextInt();
+        scanner.nextLine();
+
+        String habitat = switch (zona) {
+            case 1 -> "Lago";
+            case 2 -> "Cueva";
+            case 3 -> "Montaña";
+            case 4 -> "Bosque";
+            case 5 -> "Prado";
+            case 6 -> "Mar";
+            default -> null;
+        };
+
+        if (habitat != null) {
+            List<Pokemon> posibles = new ArrayList<>();
+            for (Pokemon p : pokedex) {
+                if (p.getHabitat().equals(habitat)) {
+                    posibles.add(p);
+                }
+            }
+            if (!posibles.isEmpty()) {
+                Pokemon encontrado = posibles.get(new Random().nextInt(posibles.size()));
+                System.out.println("¡Ha aparecido un " + encontrado.getNombre() + "!");
+                System.out.println("1) Capturar, 2) Huir");
+                int opcion = scanner.nextInt();
+                if (opcion == 1) {
+                    jugador.agregarPokemon(encontrado);
+                    System.out.println(encontrado.getNombre() + " capturado con éxito!");
+                }
+            }
+        }
+    }
 }
+
